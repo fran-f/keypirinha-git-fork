@@ -2,6 +2,7 @@
 # Git-Fork wrapper class
 # More info at https://github.com/fran-f/keypirinha-git-fork
 #
+# pylint: disable=C, import-error, relative-beyond-top-level
 
 import keypirinha_util as kpu
 

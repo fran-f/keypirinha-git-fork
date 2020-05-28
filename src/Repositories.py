@@ -2,6 +2,7 @@
 # Git-Fork Repositories plugin
 # More info at https://github.com/fran-f/keypirinha-git-fork
 #
+# pylint: disable=C, import-error, relative-beyond-top-level
 
 import keypirinha as kp
 
