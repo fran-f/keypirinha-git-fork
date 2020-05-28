@@ -19,6 +19,11 @@ class Repositories(kp.Plugin):
         'label': 'Open in Fork',
         'short_desc': 'Open the repository in a new Fork windows'
     }
+    ACTION_SHELL = {
+        'name': 'fork.shell',
+        'label': 'Open shell',
+        'short_desc': 'Open a shell in the repository root'
+    }
     ACTION_EXPLORER = {
         'name': 'fork.explorer',
         'label': 'Open location',
@@ -33,7 +38,7 @@ class Repositories(kp.Plugin):
         self._load_settings()
         self._set_up()
 
-        actions = [self.ACTION_FORK, self.ACTION_EXPLORER]
+        actions = [self.ACTION_FORK, self.ACTION_SHELL, self.ACTION_EXPLORER]
         self.set_actions(
             kp.ItemCategory.REFERENCE,
             [self.create_action(**action) for action in actions]
@@ -56,6 +61,10 @@ class Repositories(kp.Plugin):
     def on_execute(self, item, action):
         if action is None or action.name() == self.ACTION_FORK['name']:
             self.fork.openrepository(item.target())
+            return
+
+        if action.name() == self.ACTION_SHELL['name']:
+            self.fork.openshelltool(item.target())
             return
 
         if action.name() == self.ACTION_EXPLORER['name']:
