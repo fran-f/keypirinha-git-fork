@@ -33,7 +33,7 @@ class Repositories(kp.Plugin):
         self.set_catalog([
             self._item_for_repository(r) for r in self.fork.repositories()
         ])
-        
+
     def on_execute(self, item, action):
         self.fork.openrepository(item.target())
 
@@ -66,7 +66,7 @@ class Repositories(kp.Plugin):
     def _item_for_repository(self, repository):
         """
         Return a catalog item for a repository.
-        """        
+        """
         return self.create_item(
                 category = kp.ItemCategory.REFERENCE,
                 label = self.repository_prefix + repository.get("Name"),
@@ -88,7 +88,7 @@ class PluginSettings:
                 section = "fork",
                 fallback = ForkWrapper.defaultdir(),
                 unquote = True
-        );
+        )
 
     def repositoryprefix(self):
         return self._settings.get(
