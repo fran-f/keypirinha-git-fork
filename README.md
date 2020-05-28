@@ -4,6 +4,9 @@ This a plugin for the [Keypirinha](http://keypirinha.com) launcher, which adds
 catalog items for all repositories known to [Git Fork](https://git-fork.com/).
 Launching any of these items will open the repository in Fork.
 
+Hit `Tab` for extra options, including opening a repository in the configured
+shell, or in File Explorer.
+
 ![Screenshot of the plugin in action](images/keypirinha-git-fork.png)
 
 ## Download and installation
