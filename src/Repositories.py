@@ -13,6 +13,12 @@ class Repositories(kp.Plugin):
     Add catalog items for all the repositories known to Git Fork.
     """
 
+    ACTION_FORK = {
+        'name': 'fork.open',
+        'label': 'Open in Fork',
+        'short_desc': 'Open the repository in a new Fork windows'
+    }
+
     fork = None
     default_icon = None
     repository_prefix = None
@@ -20,6 +26,12 @@ class Repositories(kp.Plugin):
     def on_start(self):
         self._load_settings()
         self._set_up()
+
+        actions = [self.ACTION_FORK]
+        self.set_actions(
+            kp.ItemCategory.REFERENCE,
+            [self.create_action(**action) for action in actions]
+        )
 
     def on_events(self, flags):
         if flags & kp.Events.PACKCONFIG:
@@ -36,7 +48,8 @@ class Repositories(kp.Plugin):
         ])
 
     def on_execute(self, item, action):
-        self.fork.openrepository(item.target())
+        if action is None or action.name() == self.ACTION_FORK['name']:
+            self.fork.openrepository(item.target())
 
     def on_suggest(self, user_input, items_chain):
         pass
