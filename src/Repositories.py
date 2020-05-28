@@ -5,6 +5,7 @@
 # pylint: disable=C, import-error, relative-beyond-top-level
 
 import keypirinha as kp
+import keypirinha_util as kpu
 
 from .lib.ForkWrapper import ForkWrapper
 
@@ -18,6 +19,11 @@ class Repositories(kp.Plugin):
         'label': 'Open in Fork',
         'short_desc': 'Open the repository in a new Fork windows'
     }
+    ACTION_EXPLORER = {
+        'name': 'fork.explorer',
+        'label': 'Open location',
+        'short_desc': 'Open the repository root in Explorer'
+    }
 
     fork = None
     default_icon = None
@@ -27,7 +33,7 @@ class Repositories(kp.Plugin):
         self._load_settings()
         self._set_up()
 
-        actions = [self.ACTION_FORK]
+        actions = [self.ACTION_FORK, self.ACTION_EXPLORER]
         self.set_actions(
             kp.ItemCategory.REFERENCE,
             [self.create_action(**action) for action in actions]
@@ -50,6 +56,11 @@ class Repositories(kp.Plugin):
     def on_execute(self, item, action):
         if action is None or action.name() == self.ACTION_FORK['name']:
             self.fork.openrepository(item.target())
+            return
+
+        if action.name() == self.ACTION_EXPLORER['name']:
+            kpu.explore_file(item.target())
+            return
 
     def on_suggest(self, user_input, items_chain):
         pass
