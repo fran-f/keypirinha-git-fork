@@ -16,9 +16,6 @@ class Repositories(kp.Plugin):
     default_icon = None
     repository_prefix = None
 
-    def __init__(self):
-        super().__init__()
-
     def on_start(self):
         self._load_settings()
         self._set_up()
